@@ -18,9 +18,9 @@ export default function LoginPage() {
     e.preventDefault()
     setError(null)
     setLoading(true)
-    const { error } = await signIn(email, password)
-    if (error) {
-      setError(error.message)
+    const { error: signInError } = await signIn(email, password)
+    if (signInError) {
+      setError(signInError.message)
       setLoading(false)
     } else {
       router.push(ROUTES.INTERVIEWS.LIST)

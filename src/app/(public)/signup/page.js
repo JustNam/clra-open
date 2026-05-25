@@ -18,9 +18,9 @@ export default function SignupPage() {
     e.preventDefault()
     setError(null)
     setLoading(true)
-    const { error } = await signUp(email, password)
-    if (error) {
-      setError(error.message)
+    const { error: signUpError } = await signUp(email, password)
+    if (signUpError) {
+      setError(signUpError.message)
       setLoading(false)
     } else {
       router.push(ROUTES.INTERVIEWS.LIST)
