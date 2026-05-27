@@ -2,9 +2,13 @@ import { NextResponse } from 'next/server'
 
 const PUBLIC_ROUTES = ['/login', '/signup']
 
+// The session cookie name depends on the active backend.
+const BACKEND = process.env.NEXT_PUBLIC_BACKEND || 'valtown'
+const TOKEN_COOKIE = BACKEND === 'supabase' ? 'sb-access-token' : 'clra_token'
+
 export function middleware(request) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get('clra_token')?.value
+  const token = request.cookies.get(TOKEN_COOKIE)?.value
 
   const isPublic = PUBLIC_ROUTES.some(route => pathname.startsWith(route))
 
