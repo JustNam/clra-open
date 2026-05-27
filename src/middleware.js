@@ -4,8 +4,7 @@ const PUBLIC_ROUTES = ['/login', '/signup']
 
 export function middleware(request) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get('sb-access-token')?.value
-    || request.cookies.get('supabase-auth-token')?.value
+  const token = request.cookies.get('clra_token')?.value
 
   const isPublic = PUBLIC_ROUTES.some(route => pathname.startsWith(route))
 
