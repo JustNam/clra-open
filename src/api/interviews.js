@@ -1,13 +1,7 @@
-// The API service layer: no axios calls in components.
-// All HTTP requests live here. Components call these methods.
-import axios from 'axios'
-import { interviewAdapter } from '@/adapters/interview.adapter'
+// API service facade: components import from here and never see which backend
+// answers. The active provider is chosen by NEXT_PUBLIC_BACKEND (see config).
+import { isSupabase } from '@/config/backend'
+import { InterviewsApi as Valtown } from './providers/valtown/interviews'
+import { InterviewsApi as Supabase } from './providers/supabase/interviews'
 
-// TODO (student): implement list, getById, create, update, remove
-// Example structure:
-// export const InterviewsApi = {
-//   list: async () => {
-//     const { data } = await axios.get('/api/interviews')
-//     return interviewAdapter.listToFrontend(data)
-//   },
-// }
+export const InterviewsApi = isSupabase ? Supabase : Valtown

@@ -1,6 +1,6 @@
-// The API service layer: no axios calls in components.
-// All HTTP requests live here. Components call these methods.
-import axios from 'axios'
-import { problemAdapter } from '@/adapters/problem.adapter'
+// API service facade — provider chosen by NEXT_PUBLIC_BACKEND (see config).
+import { isSupabase } from '@/config/backend'
+import { ProblemsApi as Valtown } from './providers/valtown/problems'
+import { ProblemsApi as Supabase } from './providers/supabase/problems'
 
-// TODO (student): implement list, getById, create, update, remove
+export const ProblemsApi = isSupabase ? Supabase : Valtown

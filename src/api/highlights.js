@@ -1,6 +1,6 @@
-// The API service layer: no axios calls in components.
-// All HTTP requests live here. Components call these methods.
-import axios from 'axios'
-import { highlightAdapter } from '@/adapters/highlight.adapter'
+// API service facade — provider chosen by NEXT_PUBLIC_BACKEND (see config).
+import { isSupabase } from '@/config/backend'
+import { HighlightsApi as Valtown } from './providers/valtown/highlights'
+import { HighlightsApi as Supabase } from './providers/supabase/highlights'
 
-// TODO (student): implement list, create, remove
+export const HighlightsApi = isSupabase ? Supabase : Valtown

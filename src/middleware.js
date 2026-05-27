@@ -2,10 +2,13 @@ import { NextResponse } from 'next/server'
 
 const PUBLIC_ROUTES = ['/login', '/signup']
 
+// Both backends mirror their session token into this cookie (see the auth
+// strategies in src/auth/providers/*), so the gate is backend-agnostic.
+const TOKEN_COOKIE = 'clra_token'
+
 export function middleware(request) {
   const { pathname } = request.nextUrl
-  const token = request.cookies.get('sb-access-token')?.value
-    || request.cookies.get('supabase-auth-token')?.value
+  const token = request.cookies.get(TOKEN_COOKIE)?.value
 
   const isPublic = PUBLIC_ROUTES.some(route => pathname.startsWith(route))
 
