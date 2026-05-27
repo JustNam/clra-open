@@ -1,7 +1,9 @@
-// Auth token storage. We keep the token in a cookie (not localStorage) so the
-// Next.js middleware can read it server-side to gate routes. See src/middleware.js.
+// App session cookie. We keep a token in a cookie (not just localStorage) so the
+// Next.js middleware can read it server-side to gate routes. Used by both
+// backends: valtown stores its JWT here; the supabase strategy mirrors the
+// Supabase access token here. See src/middleware.js.
 const TOKEN_KEY = 'clra_token'
-const MAX_AGE = 60 * 60 * 24 * 7 // 7 days, matches the JWT TTL on the backend
+const MAX_AGE = 60 * 60 * 24 * 7 // 7 days
 
 export function getToken() {
   if (typeof document === 'undefined') return null

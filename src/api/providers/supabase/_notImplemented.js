@@ -2,10 +2,10 @@
 // throws a clear, actionable error if the flag is flipped before the Supabase
 // providers are built out.
 //
-// To implement this backend:
-//   1. npm install @supabase/supabase-js
-//   2. Recreate a Supabase client (see git history for src/lib/supabase/client.js)
-//   3. Fill in these methods using supabase.from(...) / supabase.auth.*,
+// Auth is already implemented (see src/auth/providers/supabase.js).
+// To implement the data resources:
+//   1. Import the client: getSupabaseClient() from src/lib/supabase/client.js
+//   2. Fill in these methods using supabase.from(...).select/insert/update/delete,
 //      reusing the SAME adapters in src/adapters/* — the column shapes match.
 export function notImplemented(method) {
   return () => {

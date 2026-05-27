@@ -46,6 +46,7 @@ NEXT_PUBLIC_BACKEND=supabase  # stubbed — not implemented yet
 Components import from the facades (`src/api/*.js`, `src/auth/strategy.js`), which pick a provider based on the flag. Both backends return the **same column shapes**, so they share the adapters in `src/adapters/`.
 
 - Val Town providers (working): `src/api/providers/valtown/`, `src/auth/providers/valtown.js`
-- Supabase providers (stubs that throw `not implemented`): `src/api/providers/supabase/`, `src/auth/providers/supabase.js`
+- Supabase **auth** (working): `src/api/providers/supabase/auth.js`, `src/auth/providers/supabase.js`, client in `src/lib/supabase/client.js`
+- Supabase **data** providers (stubs that throw `not implemented`): `src/api/providers/supabase/{interviews,problems,highlights,templates}.js`
 
-Selecting `supabase` today will throw a clear error on first call. To implement it, fill in those provider files (reusing the existing adapters) and re-add `@supabase/supabase-js`. Changing the flag requires restarting `npm run dev`.
+To use the Supabase backend, set `NEXT_PUBLIC_BACKEND=supabase` plus `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and restart `npm run dev`. Auth (signup/login/session/logout) works; the data resources still need their provider methods filled in (reuse the existing adapters — column shapes match). Changing the flag requires a restart.
